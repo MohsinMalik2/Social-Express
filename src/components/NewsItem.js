@@ -5,8 +5,8 @@ class NewsItem extends Component {
 
         let {title,desc,img,newsUrl} = this.props;
         return (
-            <div className='col-md-3 my-3 text-center'>
-                <div className="card mx-3 " style={{width: "18rem"}}>
+            
+                <div className="card mx-3 my-3" style={{width: "18rem"}}>
                     <img src={img} className="card-img-top" alt="..." />
                     <div className="card-body">
                         <h5 className="card-title">{title}...</h5>
@@ -14,7 +14,6 @@ class NewsItem extends Component {
                         <a href={newsUrl} target="_blank" rel="noreferrer" className="btn btn-primary">Read More</a>
                     </div>
                 </div>
-            </div>
         );
     }
 }

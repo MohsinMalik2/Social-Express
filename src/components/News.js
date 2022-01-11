@@ -13,7 +13,7 @@ class News extends Component {
             }
         }
         async componentDidMount(){
-            var url = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=b7e3db46081440d5b4c54a42081743c6&pageSize=20&page=1";
+            var url = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=b7e3db46081440d5b4c54a42081743c6&pageSize=12&page=1";
             var data = await fetch(url);
             var parseData = await data.json();
             this.setState({
@@ -23,7 +23,7 @@ class News extends Component {
             });
         }
         prevFunction = async () =>{
-            var url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=b7e3db46081440d5b4c54a42081743c6&pageSize=20&page=${this.state.page-1}`;
+            var url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=b7e3db46081440d5b4c54a42081743c6&pageSize=12&page=${this.state.page-1}`;
             var data = await fetch(url);
             var parseData = await data.json();
             this.setState({
@@ -33,10 +33,10 @@ class News extends Component {
             });
         };
         nextFunction = async () =>{
-            var url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=b7e3db46081440d5b4c54a42081743c6&pageSize=20&page=${this.state.page-1}`;
+            var url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=b7e3db46081440d5b4c54a42081743c6&pageSize=12&page=${this.state.page-1}`;
             var data = await fetch(url);
             var parseData = await data.json();
-            if( Math.ceil(this.state.totalResult/20) < this.state.page +1){
+            if( Math.ceil(this.state.totalResult/12) < this.state.page +1){
 
                 alert("Pages End Here");
             }
@@ -59,12 +59,16 @@ class News extends Component {
                         <h1>Social Express - Top Headlines</h1>
                     </div>
                     {this.state.articles.map((element)=>{
-                           return <NewsItem newsUrl={element.url} key={element.url} title={element.title?element.title.slice(0,45):""} desc={element.description?element.description.slice(0,88):""} img={element.urlToImage?element.urlToImage:"https://cdn.vox-cdn.com/thumbor/4ECl1MgKXJDJ_pRPP6p4u_NPCaQ=/0x434:6056x3605/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/22964001/verge_vjeran_pavic_meta_3_20211028.jpg"}/>
+                           return <div className='col-md-4 text-center'>
+                                    <NewsItem newsUrl={element.url} key={element.url} title={element.title?element.title.slice(0,45):""} desc={element.description?element.description.slice(0,88):""} img={element.urlToImage?element.urlToImage:"https://cdn.vox-cdn.com/thumbor/4ECl1MgKXJDJ_pRPP6p4u_NPCaQ=/0x434:6056x3605/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/22964001/verge_vjeran_pavic_meta_3_20211028.jpg"}/>
+                               </div>
                     })}
 
                     <div className="col-md-12 text-end">
-                        <button className="btn btn-primary mx-3" disabled={this.state.page<=1} onClick={this.prevFunction} > &larr; Primary</button>
-                        <button className="btn btn-primary mx-3 des" onClick={this.nextFunction} >Next &rarr;</button>
+                        <button className="btn btn-primary mx-1" disabled={this.state.page<=1} onClick={this.prevFunction} > &larr; Previous</button>
+                            <button className="btn btn-primary mx-1" > {this.state.page} </button>
+
+                        <button className="btn btn-primary mx-1 des" onClick={this.nextFunction} >Next &rarr;</button>
                     </div>
                 </div>
             </div>
